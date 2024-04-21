@@ -10,20 +10,22 @@
   */
 
 
-#ifndef ARBOLBINARIO_H
-#define ARBOLBINARIO_H
+#ifndef NODOB_H
+#define NODOB_H
 
 #include <iostream>
 
 
 template <class key>
 class NodoB {
+  public:
+    // Constructor
+    NodoB(const key& dato, NodoB<key>* izdo = nullptr, NodoB<key>* dcho = nullptr): dato_(dato), izdo_(izdo), dcho_(dcho) {}
 
-  protected:
+    // Miembros
     key dato_;
     NodoB<key>* izdo_;
     NodoB<key>* dcho_;
 };
-
 
 #endif

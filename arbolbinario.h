@@ -15,18 +15,116 @@
 
 #include <iostream>
 #include "nodob.h"
+#include <queue>
+
+
+template <class key> class NodoB;
 
 template <class key>
 class AB {
   public:
-  bool Insertar(const key& k) = 0;
-  bool Buscar(const key& k) = 0;
-  void Inorden() const;
-  friend std::ostream& operator<<(std::ostream& os, const AB<key>& arbol);
+  AB(): raiz_(nullptr) {}
+  ~AB() { Podar(raiz_); }
+  void Podar(NodoB<key>* &nodo);
+  virtual bool Insertar(const key& k) = 0;
+  virtual bool Buscar(const key& k) = 0;
+  void Inorden(NodoB<key>* nodo) const;
+  const int Tamano() { return TamRama(raiz_); }
+  const int TamRama(NodoB<key>* nodo);
+  const int Altura() { return AlturaN(raiz_); }
+  const int AlturaN(NodoB<key>* nodo);
+  // void RecorreN(NodoB<key>* nodo);
+  // Sobrecarga del operador salida para impresión por niveles
+  friend std::ostream& operator<<(std::ostream& os, const AB<key>& arbol) {
+    std::queue<std::pair<NodoB<key>*, int>> cola;
+    NodoB<key>* nodo_actual;
+    NodoB<key>* raiz = arbol.raiz_;
+    int nivel, nivel_actual = 0;
+    cola.push(std::make_pair(raiz, 0));
+    os << "Nivel " << nivel_actual << ": ";
+    while (!cola.empty()) {
+      nodo_actual = cola.front().first;
+      nivel = cola.front().second;
+      cola.pop();
+      if (nivel > nivel_actual) {
+        os << std::endl;
+        os << "Nivel " << nivel << ": ";
+        nivel_actual = nivel;
+      }
+      if (nodo_actual != nullptr) {
+        os << "[" << nodo_actual->dato_ << "] ";
+        cola.push(std::make_pair(nodo_actual->izdo_, nivel + 1));
+        cola.push(std::make_pair(nodo_actual->dcho_, nivel + 1));
+      } else {
+        os << "[.] ";
+      }
+    }
+  }
 
-  private:
+  // protected:
   NodoB<key>* raiz_;
 };
+
+
+template <class key>
+void AB<key>::Podar(NodoB<key>* &nodo) {
+  if (nodo == nullptr) return;
+  Podar(nodo->izdo_);
+  Podar(nodo->dcho_);
+  delete nodo;
+  nodo = nullptr;
+}
+
+
+template <class key>
+void AB<key>::Inorden(NodoB<key>* nodo) const {
+  if (nodo == nullptr) return;
+  Inorden(nodo->izdo_);
+  // Procesa(nodo->clave_);
+  std::cout << nodo->dato_ << std::endl;
+  Inorden(nodo->dcho_);
+}
+
+
+template <class key>
+const int AB<key>::TamRama(NodoB<key>* nodo) {
+  if (nodo == nullptr) return 0;
+  return (1 + TamRama(nodo->izdo_) + TamRama(nodo->dcho_));
+}
+
+
+template <class key>
+const int AB<key>::AlturaN(NodoB<key>* nodo) {
+  if (nodo == nullptr) return 0;
+  int alt_izq = AlturaN(nodo->izdo_);
+  int alt_dcho = AlturaN(nodo->dcho_);
+  if (alt_dcho > alt_izq) return ++alt_dcho;
+  return ++alt_izq;
+}
+
+
+// template <class key>
+// void AB<key>::RecorreN(NodoB<key>* nodo) {
+//   std::queue<std::pair<NodoB<key>*, int>> cola;
+//   NodoB<key>* nodo_actual;
+//   int nivel, nivel_actual = 0;
+//   cola.push(std::make_pair(raiz_, 0));
+//   while (!cola.empty()) {
+//     nodo_actual = cola.front().first;
+//     nivel = cola.front().second;
+//     cola.pop();
+//     if (nivel > nivel_actual) {
+//       std::cout << std::endl;
+//       nivel_actual = nivel;
+//     }
+//     if (nodo_actual != nullptr) {
+//       std::cout << nodo_actual->dato_ << " ";
+//       cola.push(std::make_pair(nodo_actual->izdo_, nivel + 1));
+//       cola.push(std::make_pair(nodo_actual->dcho_, nivel + 1));
+//     }
+//   }
+// }
+
 
 
 
