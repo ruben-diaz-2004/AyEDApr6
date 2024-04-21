@@ -20,8 +20,7 @@
 template <class key>
 class ABB: public AB<key> {
   public:
-  bool Buscar(const key& clave) { return BuscarB(clave) != nullptr; }
-  NodoB<key>* BuscarB(const key& clave) { return BuscarRama(this->raiz_, clave); }
+  bool Buscar(const key& clave) { return BuscarRama(this->raiz_, clave) != NULL; }
   NodoB<key>* BuscarRama(NodoB<key>* nodo, const key& clave);
   bool Insertar(const key& clave) { InsertarRama(this->raiz_, clave); return true; }
   void InsertarRama(NodoB<key>* &nodo, const key& clave);
@@ -30,7 +29,7 @@ class ABB: public AB<key> {
 
 template <class key>
 NodoB<key>* ABB<key>::BuscarRama(NodoB<key>* nodo, const key& clave) {
-  if (nodo == nullptr) return nullptr;
+  if (nodo == NULL) return NULL;
   if (clave == nodo->dato_) return nodo;
   if (clave < nodo->dato_) return BuscarRama(nodo->izdo_, clave);
   return BuscarRama(nodo->dcho_, clave);
@@ -39,7 +38,7 @@ NodoB<key>* ABB<key>::BuscarRama(NodoB<key>* nodo, const key& clave) {
 
 template <class key>
 void ABB<key>::InsertarRama(NodoB<key>* &nodo, const key& clave) {
-  if (nodo == nullptr) {
+  if (nodo == NULL) {
     nodo = new NodoB<key>(clave);
   } else if (clave < nodo->dato_) {
       InsertarRama(nodo->izdo_, clave);

@@ -51,7 +51,7 @@ class AB {
         os << "Nivel " << nivel << ": ";
         nivel_actual = nivel;
       }
-      if (nodo_actual != nullptr) {
+      if (nodo_actual != NULL) {
         os << "[" << nodo_actual->dato_ << "] ";
         cola.push(std::make_pair(nodo_actual->izdo_, nivel + 1));
         cola.push(std::make_pair(nodo_actual->dcho_, nivel + 1));
@@ -68,17 +68,17 @@ class AB {
 
 template <class key>
 void AB<key>::Podar(NodoB<key>* &nodo) {
-  if (nodo == nullptr) return;
+  if (nodo == NULL) return;
   Podar(nodo->izdo_);
   Podar(nodo->dcho_);
   delete nodo;
-  nodo = nullptr;
+  nodo = NULL;
 }
 
 
 template <class key>
 void AB<key>::Inorden(NodoB<key>* nodo) const {
-  if (nodo == nullptr) return;
+  if (nodo == NULL) return;
   Inorden(nodo->izdo_);
   // Procesa(nodo->clave_);
   std::cout << nodo->dato_ << std::endl;
@@ -88,14 +88,14 @@ void AB<key>::Inorden(NodoB<key>* nodo) const {
 
 template <class key>
 const int AB<key>::TamRama(NodoB<key>* nodo) {
-  if (nodo == nullptr) return 0;
+  if (nodo == NULL) return 0;
   return (1 + TamRama(nodo->izdo_) + TamRama(nodo->dcho_));
 }
 
 
 template <class key>
 const int AB<key>::AlturaN(NodoB<key>* nodo) {
-  if (nodo == nullptr) return 0;
+  if (nodo == NULL) return 0;
   int alt_izq = AlturaN(nodo->izdo_);
   int alt_dcho = AlturaN(nodo->dcho_);
   if (alt_dcho > alt_izq) return ++alt_dcho;
@@ -103,27 +103,7 @@ const int AB<key>::AlturaN(NodoB<key>* nodo) {
 }
 
 
-// template <class key>
-// void AB<key>::RecorreN(NodoB<key>* nodo) {
-//   std::queue<std::pair<NodoB<key>*, int>> cola;
-//   NodoB<key>* nodo_actual;
-//   int nivel, nivel_actual = 0;
-//   cola.push(std::make_pair(raiz_, 0));
-//   while (!cola.empty()) {
-//     nodo_actual = cola.front().first;
-//     nivel = cola.front().second;
-//     cola.pop();
-//     if (nivel > nivel_actual) {
-//       std::cout << std::endl;
-//       nivel_actual = nivel;
-//     }
-//     if (nodo_actual != nullptr) {
-//       std::cout << nodo_actual->dato_ << " ";
-//       cola.push(std::make_pair(nodo_actual->izdo_, nivel + 1));
-//       cola.push(std::make_pair(nodo_actual->dcho_, nivel + 1));
-//     }
-//   }
-// }
+
 
 
 

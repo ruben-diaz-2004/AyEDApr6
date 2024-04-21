@@ -20,7 +20,7 @@ template <class key>
 class NodoB {
   public:
     // Constructor
-    NodoB(const key& dato, NodoB<key>* izdo = nullptr, NodoB<key>* dcho = nullptr): dato_(dato), izdo_(izdo), dcho_(dcho) {}
+    NodoB(const key& dato, NodoB<key>* izdo = NULL, NodoB<key>* dcho = NULL): dato_(dato), izdo_(izdo), dcho_(dcho) {}
 
     // Miembros
     key dato_;

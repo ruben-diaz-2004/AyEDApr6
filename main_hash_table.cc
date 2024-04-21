@@ -26,20 +26,6 @@
 int main(int argc, char *argv[]) {
   parameters options = parse_args(argc, argv);
 
-  // StaticSequence<Nif>* sequencia_a_ordenar;
-  // switch (options.init_code) {
-  //   case 0:
-  //     sequencia_a_ordenar = new StaticSequence<Nif>(options.size, options.init_code); // Manual
-  //     break;
-  //   case 1:
-  //     sequencia_a_ordenar = new StaticSequence<Nif>(options.size, options.init_code); // Random
-  //     break;
-  //   case 2:
-  //     std::fstream file(options.file_name);
-  //     sequencia_a_ordenar = new StaticSequence<Nif>(options.size, file); // File
-  //     break;
-  // }
-
   AB<Nif>* arbol;
   switch (options.tipo_de_arbol) {
     case 0:
@@ -50,20 +36,36 @@ int main(int argc, char *argv[]) {
       break;
   }
 
+  Nif* nif;
+  long clave;
   switch (options.init_code) {
     case 0:
       // arbol->InicializarManual();
+      std::cout << "Introduce las claves a insertar (0 para terminar):" << std::endl;
+      while (true) {
+        std::cin >> clave;
+        if (clave == 0) {
+          break;
+        }
+        nif = new Nif(clave);
+        arbol->Insertar(*nif);
+      }
       break;
     case 1:
       // arbol->InicializarAleatorio(options.numero_de_elementos);
+      srand(time(NULL));
+      for (int i{0}; i < options.numero_de_elementos; i++) {
+        clave = rand();
+        nif = new Nif(clave);
+        arbol->Insertar(*nif);
+      }
       break;
     case 2:
       // arbol->InicializarFichero(options.numero_de_elementos, options.file_name);
       break;
   }
 
-  Nif* nif;
-  long clave;
+
   int opcion;
   bool running = true;
   while (running) {
@@ -91,11 +93,12 @@ int main(int argc, char *argv[]) {
         }
         break;
       case 3:
-        arbol->Inorden(arbol->raiz_);
+        // arbol->Inorden(arbol->raiz_);
+        std::cout << *arbol << std::endl;
         std::cout << std::endl;
         break;
     }
-    std::cout << *arbol << std::endl;
+    // std::cout << *arbol << std::endl;
   } 
   // SortMethod<Nif>* metodo_ordenacion;
   // switch (options.sort_code) {

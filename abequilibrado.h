@@ -26,14 +26,15 @@ class ABE: public AB<key> {
   void InsertaEquil(const key& dato);
   void InsertaEquilRama(const key& dato, NodoB<key>* nodo);
   bool Insertar(const key& k) { InsertaEquil(k); return true; }
-  bool Buscar(const key& k) { return false; }
+  bool Buscar(const key& k);
+  bool BuscarRama(NodoB<key>* nodo, const key& clave);
 };
 
 
 
 template <class key>
 const bool ABE<key>::EquilibrioRama(NodoB<key>* nodo) {
-  if (nodo == nullptr) return true;
+  if (nodo == NULL) return true;
   int equilibrio = TamRama(nodo->izdo_) - TamRama(nodo->dcho_);
   switch (equilibrio) {
     case -1:
@@ -48,7 +49,7 @@ const bool ABE<key>::EquilibrioRama(NodoB<key>* nodo) {
 
 template <class key>
 void ABE<key>::InsertaEquil(const key& dato) {
-  if (this->raiz_ == nullptr) {
+  if (this->raiz_ == NULL) {
     this->raiz_ = new NodoB<key>(dato, NULL, NULL);
     return;
   }
@@ -73,4 +74,25 @@ void ABE<key>::InsertaEquilRama(const key& dato, NodoB<key>* nodo) {
     }
   }
 }
+
+
+
+template <class key>
+bool ABE<key>::Buscar(const key& k) {
+  return BuscarRama(this->raiz_, k);
+}
+
+
+template <class key>
+bool ABE<key>::BuscarRama(NodoB<key>* nodo, const key& clave) {
+
+  if (nodo == NULL) return NULL;
+  if (clave == nodo->dato_) return nodo;
+  return (BuscarRama(nodo->izdo_, clave) || BuscarRama(nodo->dcho_, clave));
+}
+
+
+
+
+
 #endif
