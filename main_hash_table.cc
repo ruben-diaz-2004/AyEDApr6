@@ -62,6 +62,12 @@ int main(int argc, char *argv[]) {
       break;
     case 2:
       // arbol->InicializarFichero(options.numero_de_elementos, options.file_name);
+      std::ifstream file(options.file_name);
+      for (int i{0}; i < options.numero_de_elementos; i++) { 
+        file >> clave;
+        nif = new Nif(clave);
+        arbol->Insertar(*nif);
+      }
       break;
   }
 
@@ -93,53 +99,16 @@ int main(int argc, char *argv[]) {
         }
         break;
       case 3:
-        // arbol->Inorden(arbol->raiz_);
-        std::cout << *arbol << std::endl;
+        arbol->Inorden(arbol->raiz_);
         std::cout << std::endl;
+        break;
+      default:
+        std::cout << *arbol << std::endl;
         break;
     }
     // std::cout << *arbol << std::endl;
   } 
-  // SortMethod<Nif>* metodo_ordenacion;
-  // switch (options.sort_code) {
-  //   case 0:
-  //     metodo_ordenacion = new SelectionSort<Nif>(*sequencia_a_ordenar, options.size, options.trace);
-  //     break;
-  //   case 1:
-  //     metodo_ordenacion = new QuickSort<Nif>(*sequencia_a_ordenar, options.size, options.trace);
-  //     break;
-  //   case 2:
-  //     metodo_ordenacion = new HeapSort<Nif>(*sequencia_a_ordenar, options.size, options.trace);
-  //     break;
-  //   case 3:
-  //     metodo_ordenacion = new ShellSort<Nif>(*sequencia_a_ordenar, options.size, options.trace);
-  //     break;
-  //   case 4:
-  //     metodo_ordenacion = new RadixSort<Nif>(*sequencia_a_ordenar, options.size, options.trace);
-  //     break;
-  // }
 
-  // std::cout << "Antes de ordenar" << std::endl << std::endl;
-  // metodo_ordenacion->Print();
-  // std::cout << "Llamando al metodo de ordenacion" << std::endl;
-  // metodo_ordenacion->Sort();
-  // std::cout << "Despues de ordenar" << std::endl;
-  // metodo_ordenacion->Print();
-
-  // bool running = true;
-  // char stop;
-  // long clave;
-  // while(running) {
-  //   std::cin >> stop;
-  //   switch(stop) {
-  //     case 'x':
-  //       running = false;
-  //       break;
-  //     default:
-  //       running = false;
-  //       break;
-  //   }
-  // }
 
   return 0;
 }

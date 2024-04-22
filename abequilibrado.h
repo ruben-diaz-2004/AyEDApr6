@@ -25,7 +25,7 @@ class ABE: public AB<key> {
   const bool EquilibrioRama(NodoB<key>* nodo);
   void InsertaEquil(const key& dato);
   void InsertaEquilRama(const key& dato, NodoB<key>* nodo);
-  bool Insertar(const key& k) { InsertaEquil(k); return true; }
+  bool Insertar(const key& k);
   bool Buscar(const key& k);
   bool BuscarRama(NodoB<key>* nodo, const key& clave);
 };
@@ -91,6 +91,14 @@ bool ABE<key>::BuscarRama(NodoB<key>* nodo, const key& clave) {
   return (BuscarRama(nodo->izdo_, clave) || BuscarRama(nodo->dcho_, clave));
 }
 
+
+
+template <class key>
+bool ABE<key>::Insertar(const key& k) {
+  if (Buscar(k)) return false;
+  InsertaEquil(k);
+  return true;
+}
 
 
 

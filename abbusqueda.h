@@ -22,7 +22,7 @@ class ABB: public AB<key> {
   public:
   bool Buscar(const key& clave) { return BuscarRama(this->raiz_, clave) != NULL; }
   NodoB<key>* BuscarRama(NodoB<key>* nodo, const key& clave);
-  bool Insertar(const key& clave) { InsertarRama(this->raiz_, clave); return true; }
+  bool Insertar(const key& clave);
   void InsertarRama(NodoB<key>* &nodo, const key& clave);
 };
 
@@ -45,5 +45,15 @@ void ABB<key>::InsertarRama(NodoB<key>* &nodo, const key& clave) {
   }
   else InsertarRama(nodo->dcho_, clave);
 }
+
+
+template <class key>
+bool ABB<key>::Insertar(const key& clave) {
+  if (Buscar(clave)) return false;
+  InsertarRama(this->raiz_, clave);
+  return true;
+}
+
+
 
 #endif

@@ -59,6 +59,7 @@ class AB {
         os << "[.] ";
       }
     }
+    return os;
   }
 
   // protected:
