@@ -32,6 +32,10 @@ class ABE: public AB<key> {
 
 
 
+/**
+ * @brief Comprueba si un árbol está equilibrado
+ * @param nodo Nodo a comprobar
+*/
 template <class key>
 const bool ABE<key>::EquilibrioRama(NodoB<key>* nodo) {
   if (nodo == NULL) return true;
@@ -47,6 +51,11 @@ const bool ABE<key>::EquilibrioRama(NodoB<key>* nodo) {
 }
 
 
+
+/**
+ * @brief Inserta un nodo en el árbol de forma equilibrada
+ * @param dato Dato a insertar
+*/
 template <class key>
 void ABE<key>::InsertaEquil(const key& dato) {
   if (this->raiz_ == NULL) {
@@ -57,6 +66,12 @@ void ABE<key>::InsertaEquil(const key& dato) {
 }
 
 
+
+/**
+ * @brief Inserta un nodo en una rama de forma equilibrada
+ * @param dato Dato a insertar
+ * @param nodo Nodo en el que insertar
+*/
 template <class key>
 void ABE<key>::InsertaEquilRama(const key& dato, NodoB<key>* nodo) {
   if (this->TamRama(nodo->izdo_) <= this->TamRama(nodo->dcho_)) {
@@ -77,12 +92,22 @@ void ABE<key>::InsertaEquilRama(const key& dato, NodoB<key>* nodo) {
 
 
 
+/**
+ * @brief Busca un nodo en el árbol
+ * @param k Clave a buscar
+*/
 template <class key>
 bool ABE<key>::Buscar(const key& k) {
   return BuscarRama(this->raiz_, k);
 }
 
 
+
+/**
+ * @brief Busca un nodo en una rama del árbol
+ * @param nodo Nodo en el que buscar
+ * @param clave Clave a buscar
+*/
 template <class key>
 bool ABE<key>::BuscarRama(NodoB<key>* nodo, const key& clave) {
 
@@ -93,6 +118,10 @@ bool ABE<key>::BuscarRama(NodoB<key>* nodo, const key& clave) {
 
 
 
+/**
+ * @brief Inserta un nodo en el árbol
+ * @param k Clave a insertar
+*/
 template <class key>
 bool ABE<key>::Insertar(const key& k) {
   if (Buscar(k)) return false;

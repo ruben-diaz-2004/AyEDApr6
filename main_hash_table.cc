@@ -106,7 +106,7 @@ int main(int argc, char *argv[]) {
         std::cout << *arbol << std::endl;
         break;
     }
-    // std::cout << *arbol << std::endl;
+    std::cout << *arbol << std::endl;
   } 
 
 

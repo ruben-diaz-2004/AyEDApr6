@@ -27,6 +27,12 @@ class ABB: public AB<key> {
 };
 
 
+
+/**
+ * @brief Busca un nodo en el árbol
+ * @param nodo Nodo a buscar
+ * @param clave Clave a buscar
+*/
 template <class key>
 NodoB<key>* ABB<key>::BuscarRama(NodoB<key>* nodo, const key& clave) {
   if (nodo == NULL) return NULL;
@@ -36,6 +42,12 @@ NodoB<key>* ABB<key>::BuscarRama(NodoB<key>* nodo, const key& clave) {
 }
 
 
+
+/**
+ * @brief Inserta un nodo en el árbol
+ * @param nodo Nodo a insertar
+ * @param clave Clave a insertar
+*/
 template <class key>
 void ABB<key>::InsertarRama(NodoB<key>* &nodo, const key& clave) {
   if (nodo == NULL) {
@@ -47,6 +59,11 @@ void ABB<key>::InsertarRama(NodoB<key>* &nodo, const key& clave) {
 }
 
 
+
+/**
+ * @brief Inserta un nodo en el árbol
+ * @param clave Clave a insertar
+*/
 template <class key>
 bool ABB<key>::Insertar(const key& clave) {
   if (Buscar(clave)) return false;

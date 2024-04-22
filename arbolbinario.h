@@ -67,6 +67,10 @@ class AB {
 };
 
 
+/**
+ * @brief Podar un árbol binario
+ * @param nodo Nodo a podar
+*/
 template <class key>
 void AB<key>::Podar(NodoB<key>* &nodo) {
   if (nodo == NULL) return;
@@ -77,6 +81,11 @@ void AB<key>::Podar(NodoB<key>* &nodo) {
 }
 
 
+
+/**
+ * @brief Recorre un árbol en inorden
+ * @param nodo Nodo a recorrer
+*/
 template <class key>
 void AB<key>::Inorden(NodoB<key>* nodo) const {
   if (nodo == NULL) return;
@@ -87,6 +96,11 @@ void AB<key>::Inorden(NodoB<key>* nodo) const {
 }
 
 
+
+/**
+ * @brief Calcula el tamaño de un árbol
+ * @param nodo Nodo a calcular
+*/
 template <class key>
 const int AB<key>::TamRama(NodoB<key>* nodo) {
   if (nodo == NULL) return 0;
@@ -94,6 +108,11 @@ const int AB<key>::TamRama(NodoB<key>* nodo) {
 }
 
 
+
+/**
+ * @brief Calcula la altura de un árbol
+ * @param nodo Nodo a calcular
+*/
 template <class key>
 const int AB<key>::AlturaN(NodoB<key>* nodo) {
   if (nodo == NULL) return 0;
